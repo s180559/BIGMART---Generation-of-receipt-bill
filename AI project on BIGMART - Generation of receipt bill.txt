@@ -1,0 +1,54 @@
+class Product:
+    def __init__(self,name,price,dealprice,ratings):
+        self.name=name
+        self.price=price
+        self.dealprice=dealprice
+        self.ratings=ratings
+        self.yousave=price-dealprice
+    def displayproductdetails(self):
+        print("Product is {}".format(self.name))
+        print("Price is {}".format(self.price))
+        print("Deal price of the product is {}".format(self.dealprice))
+        print("Rating of the product is {}".format(self.ratings))
+        print("You saved {}".format(self.yousave))
+    def getdealprice(self):
+        return self.dealprice
+class electronicitem(Product):
+    def setwarranty(self,warrantyinmonths):
+        self.warrantyinmonths=warrantyinmonths
+    def getwarranty(self):
+        return self.warrantyinmonths
+class groceryitem(Product):
+    def setmanufacturedate(self,manufactureinmonths):
+        self.manufactureinmonths=manufactureinmonths
+    def getmanufacturedate(self):
+        return self.manufactureinmonths
+    def setexpiredate(self,manufactureinmonths):
+        self.expireinmonths=expireinmonths
+    def getexpiredate(self):
+        return self.expireinmonths
+class Order:
+    def __init__(self,deliveryspeed,deliveryaddress):
+        self.items_in_cart=[]
+        self.deliveryspeed=deliveryspeed
+        self.deliveryaddress=deliveryaddress
+    def additem(self, product, quantity):
+        self.items_in_cart.append((product, quantity))
+
+    def display_order_details(self):
+        for product,quantity in self.items_in_cart:
+            product.displayproductdetails()
+            
+    def display_total_bill(self):
+        totalbill=0
+        for product,quantity in self.items_in_cart:
+            price=product.getdealprice()*quantity
+            totalbill+=price 
+        print("Total bill={}".format(totalbill))
+milk = groceryitem("Milk",40, 25, 3.5)
+tv = electronicitem("TV",45000, 40000, 3.5)
+order = Order("Prime Delivery", "Hyderabad")
+order.additem(milk,2)
+order.additem(tv,1)
+order.display_order_details()
+order.display_total_bill()
